@@ -61,5 +61,7 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "wst": "/dist/",
+  "homepage": "git@github.com:EmMorrow/font-finder"
 }
