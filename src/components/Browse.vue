@@ -7,10 +7,10 @@
     <div class="wrap">
       <div v-for="item in items">
         <div class="container">
-          <div class="wrapper">
+<!--           <div class="wrapper">
             <img src="https://www.google.com/images/srpr/logo11w.png" />
             <span class="close"></span>
-          </div>
+          </div> -->
           <h1>Font Name</h1>
           <p class="desc">The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.</p>
         </div>
