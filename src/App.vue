@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Nav></Nav>
+    <!-- <Nav></Nav> -->
     <router-view/>
   </div>
 </template>
@@ -16,6 +16,9 @@ export default {
 </script>
 
 <style>
+html {
+  background-color: #F6F6F6;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
