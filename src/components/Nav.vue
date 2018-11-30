@@ -17,17 +17,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-nav {
-	float:right;
-	margin-bottom: 200px;
 
-}
 a {
 	margin: 20px 15px;
 }
 
 div {
-	margin-top: -30px;
+	margin: 30px;
 }
 
 
