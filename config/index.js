@@ -43,7 +43,8 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/Font-Finder',
+    // assetsPublicPath: '/Font-Finder',
+    assetsPublicPath: '',
 
     /**
      * Source Maps
