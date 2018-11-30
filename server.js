@@ -1,102 +1,97 @@
-// Express Setup
 const express = require('express');
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(express.static('public'));
+app.use(express.static('public'))
 
-// Knex Setup
-const env = process.env.NODE_ENV || 'development';
-const config = require('./knexfile')[env];  
-const knex = require('knex')(config);
+let fonts = [];
+let saved = [];
+let id = 0;
 
-// bcrypt setup
-let bcrypt = require('bcrypt');
-const saltRounds = 10;
 
-app.post('/api/login', (req, res) => {
-  if (!req.body.email || !req.body.password)
-    return res.status(400).send();
-  knex('users').where('email',req.body.email).first().then(user => {
-    if (user === undefined) {
-      res.status(403).send("Invalid credentials");
-      throw new Error('abort');
-    }
-    return [bcrypt.compare(req.body.password, user.hash),user];
-  }).spread((result,user) => {
-    if (result)
-      res.status(200).json({user:user});
-    else
-      res.status(403).send("Invalid credentials");
-    return;
-  }).catch(error => {
-    if (error.message !== 'abort') {
-      console.log(error);
-      res.status(500).json({ error });
-    }
-  });
+https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyBJlUfLH58MJnqXQlyrnCCoIeihDcqVsfs&sort=popularity
+
+
+app.post('/api/saved', (req, res) => {
+  id = id + 1;
+  let font = {id:id, font: req.body.font};
+  saved.push(font);
+  res.send(font);
 });
 
-app.post('/api/users', (req, res) => {
-  if (!req.body.email || !req.body.password || !req.body.username || !req.body.name)
-    return res.status(400).send();
-  knex('users').where('email',req.body.email).first().then(user => {
-    if (user !== undefined) {
-      res.status(403).send("Email address already exists");
-      throw new Error('abort');
-    }
-    return knex('users').where('username',req.body.username).first();
-  }).then(user => {
-    if (user !== undefined) {
-      res.status(409).send("User name already exists");
-      throw new Error('abort');
-    }
-    return bcrypt.hash(req.body.password, saltRounds);
-  }).then(hash => {
-    return knex('users').insert({email: req.body.email, hash: hash, username:req.body.username,
-         name:req.body.name, role: 'user'});
-  }).then(ids => {
-    return knex('users').where('id',ids[0]).first();
-  }).then(user => {
-    res.status(200).json({user:user});
-    return;
-  }).catch(error => {
-    if (error.message !== 'abort') {
-      console.log(error);
-      res.status(500).json({ error });
-    }
-  });
+app.get('/api/saved', (req, res) => {
+  res.send(saved);
 });
 
-app.get('/api/users/:id/tweets', (req, res) => {
+app.get('/api/fonts', (req, res) => {
+  if (fonts.length == 0) {
+    
+  }
+  res.send(fonts);
+});
+
+app.get('/api/font', (req, res) => {
+
+});
+
+
+
+
+let items = [];
+let id = 0;
+
+app.get('/api/items', (req, res) => {
+  res.send(items);
+});
+
+app.post('/api/items', (req, res) => {
+  id = id + 1;
+  let item = {id:id, text:req.body.text, completed: req.body.completed, priority: req.body.priority};
+  items.push(item);
+  res.send(item);
+});
+
+// app.put('/api/items/:id', (req, res) => {
+//   let id = parseInt(req.params.id);
+//   let itemsMap = items.map(item => { return item.id; });
+//   let index = itemsMap.indexOf(id);
+//   let item = items[index];
+//   item.completed = req.body.completed;
+//   item.text = req.body.text;
+//   res.send(item);
+// });
+
+app.put('/api/items/:id', (req, res) => {
   let id = parseInt(req.params.id);
-  knex('users').join('tweets','users.id','tweets.user_id')
-    .where('users.id',id)
-    .orderBy('created','desc')
-    .select('tweet','username','name','created').then(tweets => {
-      res.status(200).json({tweets:tweets});
-    }).catch(error => {
-      res.status(500).json({ error });
-    });
+  let itemsMap = items.map(item => { return item.id; });
+  let index = itemsMap.indexOf(id);
+  let item = items[index];
+  item.completed = req.body.completed;
+  item.text = req.body.text;
+  item.priority = req.body.priority; // make sure this works
+  console.log(item.priority);
+
+  // handle drag and drop re-ordering
+  if (req.body.orderChange) {
+    let indexTarget = itemsMap.indexOf(req.body.orderTarget);
+    items.splice(index,1);
+    items.splice(indexTarget,0,item);
+  }
+  res.send(item);
 });
 
-
-app.post('/api/users/:id/tweets', (req, res) => {
+app.delete('/api/items/:id', (req, res) => {
   let id = parseInt(req.params.id);
-  knex('users').where('id',id).first().then(user => {
-    return knex('tweets').insert({user_id: id, tweet:req.body.tweet, created: new Date()});
-  }).then(ids => {
-    return knex('tweets').where('id',ids[0]).first();
-  }).then(tweet => {
-    res.status(200).json({tweet:tweet});
+  let removeIndex = items.map(item => { return item.id; }).indexOf(id);
+  if (removeIndex === -1) {
+    res.status(404).send("Sorry, that item doesn't exist");
     return;
-  }).catch(error => {
-    console.log(error);
-    res.status(500).json({ error });
-  });
+  }
+  items.splice(removeIndex, 1);
+  res.sendStatus(200);
 });
 
-app.listen(3000, () => console.log('Server listening on port 3000!'));
+app.listen(3000, () => console.log('Server listening on port 3000!'))
