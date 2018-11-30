@@ -1,3 +1,4 @@
+
 <template>
   <div id="app">
     <!-- <Nav></Nav> -->
@@ -6,6 +7,7 @@
 </template>
 
 <script>
+
 import Nav from './components/Nav'
 export default {
   name: 'App',
@@ -28,3 +30,4 @@ html {
   margin-top: 60px;
 }
 </style>
+
