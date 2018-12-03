@@ -1,10 +1,13 @@
 
 <template>
   <div>
-    <div class="wrap">
-      <div v-for="(font,index) in titleFonts":key="index">
+    <div class="row">
+      
+    </div>
+    <div class="row" style="margin-left:60px; margin-right:60px">
+      <div v-for="(font,index) in titleFonts":key="index" class="col-lg-6 col-md-6 col-sm-12">
 
-        <div v-if="currFont.fontFamily = font.family" class="container col-lg-5 col-md-5 col-sm-10">
+        <div v-if="currFont.fontFamily = font.family" class="my-container">
 
           <div class="row">
             <div class="controls col-md-3" style="padding-top:10px; padding-bottom:20px; padding-left:10px; padding-right: 10px">
@@ -12,28 +15,28 @@
             </div>
           </div>
 
-            <div class="row">
-              <div class="controls col-lg-3 col-md-2" id="title-controls">
-              </div>
-              
-              <div class="col-lg-9 col-md-9 col-sm-7 col-xs-9">
-                <h1 style="font-family:currFont.fontFamily">{{currFont.fontFamily}}</h1>
-              </div>
+          <div class="row">
+            <div class="controls col-lg-3 col-md-2" id="title-controls">
             </div>
+            
+            <div class="col-lg-9 col-md-9 col-sm-7 col-xs-9">
+              <h1 style="font-family:currFont.fontFamily">{{currFont.fontFamily}}</h1>
+            </div>
+          </div>
 
-            <div class="row">
-              <div class="controls col-lg-3 col-md-2" style="height:500px">
-              <a href="google.com">hi</a>
-              </div>
-              
-              <div class="col-lg-9 col-md-9 col-sm-7 col-xs-9">
-                <p class="desc"><span style="font-weight:800">{{bodyFonts[index].family}}</span> - The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.</p>
-              </div>
+          <div class="row">
+            <div class="controls col-lg-3 col-md-2" style="height:500px">
+            <a href="google.com">hi</a>
+            </div>
+            
+            <div class="col-lg-9 col-md-9 col-sm-7 col-xs-9">
+              <p class="desc"><span style="font-weight:800">{{bodyFonts[index].family}}</span> - The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.</p>
             </div>
           </div>
         </div>
-      </div>  
 
+      </div>
+    </div>  
   </div>
 </template>
 <!-- <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script> -->
@@ -193,9 +196,10 @@ font-family: 'Hind Madurai', helvetica, arial, sans-serif;
 font-weight: 300;
 }
 
-.container {
+.my-container {
   background-color: #222;
   margin: 20px;
+  margin-top: 0px;
 }
 
 .controls{
