@@ -5,7 +5,7 @@
       
     </div>
     <div class="row" style="margin-left:60px; margin-right:60px">
-      <div v-for="(font,index) in titleFonts":key="index" class="col-lg-6 col-md-6 col-sm-12">
+      <div v-for="(font,index) in titleFonts" :key="index" class="col-lg-6 col-md-6 col-sm-12">
 
         <div v-if="currFont.fontFamily = font.family" class="my-container">
 
@@ -624,13 +624,13 @@ filter: invert(10%);
 }
 h1 {
   font-size: 1.2em;
-  color: $dark;
+  color: dark;
   margin-top: -5px;
 }
 
 h2 {
-  color: $tan;
-  margin-top: -5px;
+  color: tan;
+  margin-top : -5px;
 }
 .wrap {
 
@@ -640,7 +640,7 @@ h2 {
 .desc {
   text-transform: none;
   letter-spacing: 0;
-  color: $dark;
+  color: dark;
   font-size: .7em;
   line-height: 1.6em;
   text-align: justify;
