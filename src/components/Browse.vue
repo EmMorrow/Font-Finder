@@ -5,10 +5,9 @@
       
     </div>
     <div class="row" style="margin-left:60px; margin-right:60px">
-      <div v-for="(font,index) in titleFonts" :key="index" class="col-lg-6 col-md-6 col-sm-12">
-
-        <div v-if="currFont.fontFamily = font.family" class="my-container">
-
+      
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="my-container">
           <div class="row">
             <div class="controls col-md-3" style="padding-top:10px; padding-bottom:20px; padding-left:10px; padding-right: 10px">
               <i v-on:click="save" class="far fa-heart" style="margin-right: 10px"></i>Save
@@ -20,22 +19,51 @@
             </div>
             
             <div class="col-lg-9 col-md-9 col-sm-7 col-xs-9">
-              <h1 style="font-family:currFont.fontFamily">{{currFont.fontFamily}}</h1>
+              <h1 v-bind:style="titleFont1" class="titleFont">{{titleFont1.fontFamily}}</h1>
             </div>
           </div>
 
           <div class="row">
             <div class="controls col-lg-3 col-md-2" style="height:500px">
-            <a href="google.com">hi</a>
+            <a href="google.com" target="_blank">hi</a>
             </div>
             
             <div class="col-lg-9 col-md-9 col-sm-7 col-xs-9">
-              <p class="desc"><span style="font-weight:800">{{bodyFonts[index].family}}</span> - The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.</p>
+              <p class="desc" v-bind:style="bodyFont1" ><span style="font-weight:800">{{bodyFont1.fontFamily}}</span> - The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.</p>
             </div>
           </div>
         </div>
-
       </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="my-container">
+          <div class="row">
+            <div class="controls col-md-3" style="padding-top:10px; padding-bottom:20px; padding-left:10px; padding-right: 10px">
+              <i v-on:click="save" class="far fa-heart" style="margin-right: 10px"></i>Save
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="controls col-lg-3 col-md-2" id="title-controls">
+            </div>
+            
+            <div class="col-lg-9 col-md-9 col-sm-7 col-xs-9">
+              <h1 v-bind:style="titleFont2" class="titleFont">{{titleFont2.fontFamily}}</h1>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="controls col-lg-3 col-md-2" style="height:500px">
+            <a href="google.com" target="_blank">hi</a>
+            </div>
+            
+            <div class="col-lg-9 col-md-9 col-sm-7 col-xs-9">
+              <p v-bind:style="bodyFont2" class="desc"><span style="font-weight:800">{{bodyFont2.fontFamily}}</span> - The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
     </div>  
   </div>
 </template>
@@ -49,50 +77,35 @@ export default {
   name: 'Browse',
   data: function() {
     return {
-      items: [
-        {num: 1},
-        // {num: 2},
-        // {num: 3},
-        // {num: 1},
-        // {num: 2},
-        // {num: 3},
-        // {num: 1},
-        // {num: 2},
-        // {num: 3},
-        // {num: 1},
-        // {num: 2},
-        // {num: 3},
-        // {num: 1},
-        // {num: 2},
-        // {num: 3},
-        // {num: 1},
-        // {num: 2},
-        // {num: 3},
-      ],
-      titleFonts: [
-        {id:1,family: "'Roboto', sans-serif"},
-        {id:2,family: "'Noto Sans TC', sans-serif"},
-      ],
-      bodyFonts: [
-        {id:3,family: "'Noto Sans SC', sans-serif"},
-        {id:4,family: "'Open Sans', sans-serif"},
-        // {id:5,family: "'Lato', sans-serif"},
-        // {id:6,family: "'Black Han Sans', sans-serif"},
-        // {id:7,family: "'Roboto Condensed', sans-serif"},
-        // {id:8,family: "'Source Sans Pro', sans-serif"},
-        // {id:9,family: "'Oswald', sans-serif"},
-      ],
-      currFont: {
-        fontFamily: "hii"
+      titleFonts: [],
+      //   {id:1,family: "'Roboto', sans-serif"},
+      //   {id:2,family: "'Noto Sans TC', sans-serif"},
+      // ],
+      // bodyFonts: [
+      //   {id:3,family: "'Noto Sans SC', sans-serif"},
+      //   {id:4,family: "'Open Sans', sans-serif"},
+      //   // {id:5,family: "'Lato', sans-serif"},
+      //   // {id:6,family: "'Black Han Sans', sans-serif"},
+      //   // {id:7,family: "'Roboto Condensed', sans-serif"},
+      //   // {id:8,family: "'Source Sans Pro', sans-serif"},
+      //   // {id:9,family: "'Oswald', sans-serif"},
+      // ],
+      titleFont1: {
+        fontFamily: "'Noto Sans SC', sans-serif"
       },
-      id: 1
+      titleFont2: {
+        fontFamily: "'Roboto', sans-serif"
+      },
+      bodyFont1: {
+        fontFamily: "'Open Sans', sans-serif"
+      },
+      bodyFont2: {
+        fontFamily: "'Lato', sans-serif"
+      },
+      // id: 1
     }
   },
   methods: {
-    save: function(event) {
-      Saved.items.push({ id: this.id, family: currFont.fontFamily })
-      id += 1
-    }
   }
 }
 </script>
@@ -103,6 +116,12 @@ export default {
 h1, h2 {
   font-weight: normal;
 }
+
+.titleFont {
+  font-size: 35px;
+  font-weight: 600;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -217,9 +236,6 @@ z-index: 2010;
 
 .col-md-offset-1{
 margin-left: 6%;
-}
-
-.row{
 }
 
 .font-progress i {
@@ -641,7 +657,7 @@ h2 {
   text-transform: none;
   letter-spacing: 0;
   color: dark;
-  font-size: .7em;
+  font-size: 20px;
   line-height: 1.6em;
   text-align: justify;
 }

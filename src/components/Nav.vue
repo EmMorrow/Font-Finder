@@ -2,8 +2,8 @@
  
   <div class="row" style="margin: 60px;"> 
 	  <nav> 
-			<div class="col-lg-6 col-md-5 col-sm-5"><h1>FontFinder</h1></div>
-			<div class="col-lg-6 col-md-5 col-sm-5">
+			<div class="col-lg-6 col-md-6 col-sm-6"><h1>FontFinder</h1></div>
+			<div class="col-lg-6 col-md-6 col-sm-6">
 				<router-link to="/">Browse</router-link>
 				<router-link to="/saved">Saved</router-link>
 			</div>
